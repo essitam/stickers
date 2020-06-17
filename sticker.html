@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style media="screen">
+      .imgg{
+        width:100px;
+        height:100px;
+      }
+      #dropzone {
+      padding: 18px;
+      border-style: dashed;
+      font-size: 24pt;
+      width: 50%;
+    }
+    </style>
+  </head>
+  <body>
+    <div class= "row">
+      <div class="col-8 border">
+        <div id="cnv"></div>
+      </div>
+      <div class=" col-2 border">
+        <img class=" imgg" src="https://cdn.glitch.com/bc831c14-9a50-45a0-88b2-b8e94aa5b4f0%2Forange-patch.gif?v=1576451066974" id="img1" onclick="getsrc('img1');">
+        <img class=" imgg" src="https://cdn.glitch.com/bc831c14-9a50-45a0-88b2-b8e94aa5b4f0%2Fbubble.gif?v=1576450998619" id="img2" onclick="getsrc('img2');">
+        <img class=" imgg" src="https://cdn.glitch.com/bc831c14-9a50-45a0-88b2-b8e94aa5b4f0%2Fthingyyyypurpllle.png?v=1579810108846" id="img3" onclick="getsrc('img3');">
+<!--         <img class=" imgg" src="huh(100).png" id="img4" onclick="getsrc('img4');"> -->
+      </div>
+        </div>
+      <div class="row border">
+        <div class="col-2">
+
+        </div>
+        <div class="col-8">
+        peeeeeeeeep<br/>
+        draww w w w  <br/>
+          theE e e n <b>hover cursor</b> + <b>press "s"-key</b> to <b>download a new sticker </b>to your computer !
+        <br/>the size will be the same as below</br/>
+        ee ee
+
+        </div>
+<!--         <div class="col-4"id="dropzone">drag</div> -->
+      </div>
+      <div><img id="circley" src="https://cdn.glitch.com/bc831c14-9a50-45a0-88b2-b8e94aa5b4f0%2Fcurosr.png?v=1579810209361" width="400px"></div>
+
+
+  <script>
+      // var stikz = ['thingyyyypurpllle.png', ];
+      var thiss;
+      var cnv;
+      var srcc = 'https://cdn.glitch.com/bc831c14-9a50-45a0-88b2-b8e94aa5b4f0%2Fthingyyyypurpllle.png?v=1579810108846';
+      var stickerdia = 200;
+      var dropzone;
+      var dropp = false;
+      var imgdrop;
+      let circli;
+      var d;
+
+
+      function preload(){
+        thiss = loadImage(srcc);
+        stickerpicker();
+      }
+      function setup(){
+        cnv = createCanvas(800, 400);
+        cnv.parent('cnv');
+        stickerpicker();
+        // dropzone = select('#dropzone');
+        // dropzone.dragOver(highlight);
+        // dropzone.dragLeave(unhighlight);
+        // dropzone.drop(gotFile, unhighlight);
+        circli = select('#circley');
+      }
+//       function gotFile(file) {
+//         createP(file.name + " " + file.size);
+//         imgdrop = createImg(file.data);
+//         imgdrop.id('thi');
+//         var d = loadImage(file.data);
+//         image(d, 0, 0);
+//         // console.log(file.name);
+//         // imgdrop=file.data;
+//         // d = sele/ct('thi');
+//         dropp=true;
+//         droppedd();
+//         // imgdrop.size(100, 100);
+//       }
+//       function droppedd(){
+//         // var d = select('thi');
+//         // console.log("''"+d +"'");
+//         // srcc = ("''"+d +"'");
+// // preload();
+//         // image(d, 100, 100);
+
+//       }
+      function highlight() {
+        dropzone.style('background-color','#ccc');
+      }
+
+      function unhighlight() {
+        dropzone.style('background-color','#fff');
+      }
+      function stickerpicker(){
+        stik = new Sticker(thiss, 25, 25);
+      }
+      function draw(){
+          if (mouseIsPressed){
+          stik.mimo();
+        }
+        if (dropp == true){
+                  image(srcc, 0, 0, this.width, this.height);
+
+        }
+
+      }
+// to download a new sticker
+        function keyPressed() {
+            if (key == 's') {
+              circli.position(mouseX-stickerdia/2, mouseY-stickerdia/2);
+              let img = createImage(stickerdia, stickerdia); // same as new p5.Image(100, 100);
+              img.copy(cnv, mouseX-stickerdia/2, mouseY-stickerdia/2, stickerdia, stickerdia, 0, 0, stickerdia, stickerdia);
+              maskImage = createGraphics(stickerdia*2, stickerdia*2);
+              maskImage.ellipse(stickerdia, stickerdia, stickerdia*2, stickerdia*2);
+              img.mask(maskImage);
+              fill(255);
+              rect(0, 0, stickerdia, stickerdia);
+              fill(0);
+              ellipse(stickerdia/2, stickerdia/2, stickerdia, stickerdia);
+              var cri = image(img, 0, 0);
+              save(img, 'sticker.png');
+            }
+          }
+          //switch src of drawing sticker
+          function getsrc(id){
+            srcc = document.getElementById(id).src;
+            console.log(srcc);
+            preload();
+          }
+        //drawing sticker
+        function Sticker(img, sizeX, sizeY){
+            this.img = img;
+            this.sizeX = sizeX;
+            this.sizeY = sizeY;
+            this.mimo = function(){
+              image(this.img, mouseX, mouseY, this.sizeX, this.sizeY)
+            }
+            this.circle = function(){
+              fill(this.img);
+              ellipse(mouseX, mouseY, this.sizeX, this.sizeY);
+            }
+          }
+
+
+    </script>
+  </body>
+</html>
