@@ -53,7 +53,7 @@
       var thiss;
       var cnv;
       var srcc = 'https://cdn.glitch.com/bc831c14-9a50-45a0-88b2-b8e94aa5b4f0%2Fthingyyyypurpllle.png?v=1579810108846';
-      var stickerdia = 200;
+      // var stickerdia = 200;
       var dropzone;
       var dropp = false;
       var imgdrop;
@@ -117,22 +117,37 @@
 
       }
 // to download a new sticker
-        function keyPressed() {
-            if (key == 's') {
-              circli.position(mouseX-stickerdia/2, mouseY-stickerdia/2);
-              let img = createImage(stickerdia, stickerdia); // same as new p5.Image(100, 100);
-              img.copy(cnv, mouseX-stickerdia/2, mouseY-stickerdia/2, stickerdia, stickerdia, 0, 0, stickerdia, stickerdia);
-              maskImage = createGraphics(stickerdia*2, stickerdia*2);
-              maskImage.ellipse(stickerdia, stickerdia, stickerdia*2, stickerdia*2);
-              img.mask(maskImage);
-              fill(255);
-              rect(0, 0, stickerdia, stickerdia);
-              fill(0);
-              ellipse(stickerdia/2, stickerdia/2, stickerdia, stickerdia);
-              var cri = image(img, 0, 0);
-              save(img, 'sticker.png');
-            }
-          }
+function keyPressed() {
+    if (key === 's') {
+      let stickerdia=200;
+      // circli.position(mouseX, mouseY);
+      let img = createImage(stickerdia, stickerdia); // same as new p5.Image(100, 100);
+      img.copy(cnv, mouseX-stickerdia/2, mouseY-stickerdia/2, stickerdia, stickerdia, 0, 0, stickerdia, stickerdia);
+      maskImage = createGraphics(stickerdia*2, stickerdia*2);
+      maskImage.ellipse(stickerdia, stickerdia, stickerdia*2, stickerdia*2);
+      img.mask(maskImage);
+ellipse(stickerdia/2, stickerdia/2, stickerdia, stickerdia);
+
+      var cri = image(img, 0,0);
+      save(img, 'mimo-sticker.png');
+    }
+  }
+        // function keyPressed() {
+        //     if (key == 's') {
+        //       circli.position(mouseX-stickerdia/2, mouseY-stickerdia/2);
+        //       let img = createImage(stickerdia, stickerdia); // same as new p5.Image(100, 100);
+        //       img.copy(cnv, mouseX-stickerdia/2, mouseY-stickerdia/2, stickerdia, stickerdia, 0, 0, stickerdia, stickerdia);
+        //       maskImage = createGraphics(stickerdia*2, stickerdia*2);
+        //       maskImage.ellipse(stickerdia, stickerdia, stickerdia*2, stickerdia*2);
+        //       img.mask(maskImage);
+        //       fill(255);
+        //       rect(0, 0, stickerdia, stickerdia);
+        //       fill(0);
+        //       ellipse(stickerdia/2, stickerdia/2, stickerdia, stickerdia);
+        //       var cri = image(img, 0, 0);
+        //       save(img, 'sticker.png');
+        //     }
+        //   }
           //switch src of drawing sticker
           function getsrc(id){
             srcc = document.getElementById(id).src;
